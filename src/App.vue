@@ -1,4 +1,5 @@
 <script setup>
+import { supabase } from "./supabase"
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
