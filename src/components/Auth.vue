@@ -16,6 +16,7 @@
   import { ref } from "vue";
   import Register from "./Register.vue";
   import Login from "./Login.vue";
+  
   export default {
     components: { Register, Login },
     setup() {

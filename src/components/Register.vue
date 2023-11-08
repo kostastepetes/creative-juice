@@ -20,11 +20,15 @@
   <script>
   import { ref } from "vue";
   import { supabase } from "../supabase";
+  import { useRouter } from 'vue-router'
+
   
   export default {
     setup() {
       const email = ref("");
       const password = ref("");
+      const router = useRouter()
+
   
       const handleSignup = async () => {
         try {
@@ -35,6 +39,7 @@
             email_confirm: true,
           });
           if (error) throw error;
+          router.push('/account')
         } catch (error) {
           alert(error.error_description || error.message);
         }

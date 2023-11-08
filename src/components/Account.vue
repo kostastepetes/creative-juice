@@ -3,9 +3,12 @@ import { supabase } from '../supabase'
 import Avatar from './Avatar.vue'
 import BackgroundImage from './BackgroundImage.vue';
 import { onMounted, ref, toRefs } from 'vue'
+import { useRouter } from 'vue-router'
 
 const props = defineProps(['session'])
 const { session } = toRefs(props)
+
+const router = useRouter()
 
 const loading = ref(true)
 const username = ref('')
@@ -73,6 +76,8 @@ async function updateProfile() {
     const { error } = await supabase.from('Profiles').upsert(updates)
 
     if (error) throw error
+   // Redirect to HelloWorld component
+    router.push('/hello-world')
   } catch (error) {
     alert(error.message)
   } finally {
@@ -85,6 +90,7 @@ async function signOut() {
     loading.value = true
     const { error } = await supabase.auth.signOut()
     if (error) throw error
+    router.push('/auth')
   } catch (error) {
     alert(error.message)
   } finally {
@@ -102,7 +108,7 @@ async function signOut() {
     <div>
       <label for="email">Email</label>
       <input id="email" type="text" :value="session.user.email" disabled />
-    </div>
+    </div> 
     <div>
       <label for="username">Name</label>
       <input id="username" type="text" v-model="username" />
