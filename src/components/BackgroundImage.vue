@@ -12,7 +12,7 @@ const files = ref()
 
 const downloadImage = async () => {
   try {
-    const { data, error } = await supabase.storage.from('avatars').download(path.value)
+    const { data, error } = await supabase.storage.from('background_images').download(path.value)
     if (error) throw error
     src.value = URL.createObjectURL(data)
   } catch (error) {
@@ -20,7 +20,7 @@ const downloadImage = async () => {
   }
 }
 
-const uploadAvatar = async (evt) => {
+const uploadbackgroundImage = async (evt) => {
   files.value = evt.target.files
   try {
     uploading.value = true
@@ -32,7 +32,7 @@ const uploadAvatar = async (evt) => {
     const fileExt = file.name.split('.').pop()
     const filePath = `${Math.random()}.${fileExt}`
 
-    const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
+    const { error: uploadError } = await supabase.storage.from('background_images').upload(filePath, file)
 
     if (uploadError) throw uploadError
     emit('update:path', filePath)
@@ -54,22 +54,22 @@ watch(path, () => {
     <img
       v-if="src"
       :src="src"
-      alt="Avatar"
-      class="avatar image"
+      alt="background_image"
+      class="background_image image"
       :style="{ height: size + 'em', width: size + 'em' }"
     />
-    <div v-else class="avatar no-image" :style="{ height: size + 'em', width: size + 'em' }" />
+    <div v-else class="background_image no-image" :style="{ height: size + 'em', width: size + 'em' }" />
 
     <div :style="{ width: size + 'em' }">
-      <label class="button primary block" for="single-avatar">
+      <label class="button primary block" for="single-background-image">
         {{ uploading ? 'Uploading ...' : 'Upload' }}
       </label>
       <input
         style="visibility: hidden; position: absolute"
         type="file"
-        id="single-avatar"
+        id="single-background-image"
         accept="image/*"
-        @change="uploadAvatar"
+        @change="uploadbackgroundImage"
         :disabled="uploading"
       />
     </div>
