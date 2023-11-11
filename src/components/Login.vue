@@ -40,7 +40,7 @@
 
           
           if (error) throw error;
-          router.push('/account')
+          router.push('/hello-world')
         } catch (error) {
           alert(error.error_description || error.message);
         }

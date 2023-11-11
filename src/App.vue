@@ -19,8 +19,7 @@ onMounted(() => {
 
 <template>
   <div class="container" style="padding: 50px 0 100px 0">
-    <Account v-if="session" :session="session" />
-    <Auth v-else />
-    <router-view />
+    <router-view v-if="session" :session="session" />
+    <router-view v-else />
   </div>
 </template>
