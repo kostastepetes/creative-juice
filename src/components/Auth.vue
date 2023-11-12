@@ -2,13 +2,15 @@
     <div>
       <Register v-if="isSignUp" />
       <Login v-else />
-      <button @click="isSignUp = !isSignUp">
+      <div class="text-center">
+      <button @click="isSignUp = !isSignUp" class="btn btn-secondary btn-block">
         {{
           isSignUp
             ? "Already have an account? Sign In"
             : "Don't have an account yet? Sign Up"
         }}
       </button>
+    </div>
     </div>
   </template>
   

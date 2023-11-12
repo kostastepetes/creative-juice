@@ -13,7 +13,7 @@ async function signOut() {
 
 <template>
 
-  <div class="card">
+  <div class="text-center">
 
     <button class="btn btn-primary" @click="signOut">Sign Out</button>
   </div>

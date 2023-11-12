@@ -1,17 +1,17 @@
 <template>
     <div>
-      <h2>Sign up for an account</h2>
-      <form @submit.prevent="handleSignup">
-        <div>
-          <label for="email">Email</label>
-          <input id="email" type="email" v-model="email" />
+      <h2 class="text-center">Sign up for an account</h2>
+      <form @submit.prevent="handleSignup" class="container">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input id="email" type="email" v-model="email" class="form-control"/>
         </div>
-        <div>
-          <label for="password">Password</label>
-          <input id="password" type="password" v-model="password" />
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input id="password" type="password" v-model="password" class="form-control"/>
         </div>
-        <div>
-          <button type="submit">Sign up</button>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary btn-block m-4">Sign up</button>
         </div>
       </form>
     </div>

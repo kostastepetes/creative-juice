@@ -104,21 +104,23 @@ async function signOut() {
 </script>
 
 <template>
+  <h2 class="text-center">Edit your Profile</h2>
   <form class="form-widget container" @submit.prevent="updateProfile">
-    <Avatar v-model:path="avatar_url" @upload="updateProfile" size="10" />
+    <Avatar v-model:path="avatar_url" @upload="updateProfile" size="15" />
 
-    <BackgroundImage v-model:path="background_url" @upload="updateProfile" size="10" />
-    <div class="form-group">
-      <label for="email">Email</label>
+    <BackgroundImage v-model:path="background_url" @upload="updateProfile" size="15" />
+    <div class="form-group m-2">
+      <label for="email">Email:</label>
       <input id="email" type="text" :value="session.user.email" disabled class="form-control"/>
     </div> 
-    <div class="form-group">
-      <label for="username">Name</label>
+    <div class="form-group m-2">
+      <label for="username">Name:</label>
       <input id="username" type="text" v-model="username" class="form-control"/>
     </div>
-    <div class="form-group">
-      <label for="job">Occupation</label>
-      <select id="job" type="text" v-model="job" multiple class="form-control">
+    <div class="form-group m-2">
+      <label for="job">Occupation:</label>
+      <select id="job" type="text" v-model="job" class="form-control">
+        <option selected disabled>Select the title that applies to you</option>
         <option value="3D Art">3D Art</option>
         <option value="Game Design">Game Design</option>
         <option value="Acting">Acting</option>
@@ -151,37 +153,37 @@ async function signOut() {
         <option value="Other">Other</option>
 </select>
     </div>
-    <div class="form-group">
-      <label for="bio">Bio</label>
+    <div class="form-group m-2">
+      <label for="bio">Bio:</label>
       <textarea id="bio" type="text" v-model="bio" class="form-control"/>
     </div>
-    <div class="form-group">
-      <label for="project_url1">Project URL 1</label>
+    <div class="form-group m-2">
+      <label for="project_url1">Project URL 1:</label>
       <input id="project_url1" type="url" v-model="project_url1" class="form-control"/>
     </div>
-    <div class="form-group">
-      <label for="project_url2">Project URL 2</label>
+    <div class="form-group m-2">
+      <label for="project_url2">Project URL 2:</label>
       <input id="project_url2" type="url" v-model="project_url2" class="form-control"/>
     </div>
-    <div class="form-group">
-      <label for="project_url3">Project URL 3</label>
+    <div class="form-group m-2">
+      <label for="project_url3">Project URL 3:</label>
       <input id="project_url3" type="url" v-model="project_url3" class="form-control"/>
     </div>
-    <div class="form-group">
-      <label for="portfolio">Portfolio Website URL</label>
+    <div class="form-group m-2">
+      <label for="portfolio">Portfolio Website URL:</label>
       <input id="portfolio" type="url" v-model="portfolio" class="form-control"/>
     </div>
 
-    <div>
+    <div class="text-center">
       <input
         type="submit"
-        class="btn btn-primary btn-block"
+        class="btn btn-primary btn-block m-4"
         :value="loading ? 'Loading ...' : 'Update'"
         :disabled="loading"
       />
     </div>
 
-    <div class="form-group">
+    <div class="form-group text-center">
       <button class="btn btn-secondary btn-block" @click="signOut" :disabled="loading">Sign Out</button>
     </div>
   </form>
