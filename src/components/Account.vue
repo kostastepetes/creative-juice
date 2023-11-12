@@ -17,6 +17,7 @@ const project_url1 = ref('')
 const project_url2 = ref('')
 const project_url3 = ref('')
 const portfolio = ref('')
+const job = ref('')
 const avatar_url = ref('')
 const background_url = ref('')
 
@@ -32,7 +33,7 @@ async function getProfile() {
 
     const { data, error, status } = await supabase
       .from('Profiles')
-      .select(`username, bio, project_url1, project_url2, project_url3, portfolio, avatar_url, background_url`)
+      .select(`username, bio, project_url1, project_url2, project_url3, portfolio, job, avatar_url, background_url`)
       .eq('id', user.id)
       .single()
 
@@ -45,6 +46,7 @@ async function getProfile() {
       project_url2.value = data.project_url2
       project_url3.value = data.project_url3
       portfolio.value = data.portfolio
+      job.value = data.job
       avatar_url.value = data.avatar_url
       background_url.value = data.background_url
     }
@@ -68,6 +70,7 @@ async function updateProfile() {
       project_url2: project_url2.value,
       project_url3: project_url3.value,
       portfolio: portfolio.value,
+      job: job.value,
       avatar_url: avatar_url.value,
       background_url: background_url.value,
       updated_at: new Date(),
@@ -112,6 +115,41 @@ async function signOut() {
     <div>
       <label for="username">Name</label>
       <input id="username" type="text" v-model="username" />
+    </div>
+    <div>
+      <label for="job">Occupation</label>
+      <select id="job" type="text" v-model="job" multiple>
+        <option value="3D Art">3D Art</option>
+        <option value="Game Design">Game Design</option>
+        <option value="Acting">Acting</option>
+        <option value="Illustration">Illustration</option>
+        <option value="Animation">Animation</option>
+        <option value="Interior Design">Interior Design</option>
+        <option value="Architecture">Architecture</option>
+        <option value="Modeling">Modeling</option>
+        <option value="Art/Creative Director">Art/Creative Director</option>
+        <option value="Music/Audio">Music/Audio</option>
+        <option value="Brand Strategist">Brand Strategist</option>
+        <option value="Painting">Painting</option>
+        <option value="Brand/Graphic Design">Brand/Graphic Design</option>
+        <option value="Photography">Photography</option>
+        <option value="Creative Code">Creative Code</option>
+        <option value="Product Design">Product Design</option>
+        <option value="Creative Writing">Creative Writing</option>
+        <option value="Sculpting">Sculpting</option>
+        <option value="Digital Marketing">Digital Marketing</option>
+        <option value="Set Design">Set Design</option>
+        <option value="Events">Events</option>
+        <option value="Typography">Typography</option>
+        <option value="Experiences">Experiences</option>
+        <option value="Videography">Videography</option>
+        <option value="Fashion Design">Fashion Design</option>
+        <option value="Video Editing">Video Editing</option>
+        <option value="Film">Film</option>
+        <option value="Web/App Development">Web/App Development</option>
+        <option value="Furniture Design">Furniture Design</option>
+        <option value="Other">Other</option>
+</select>
     </div>
     <div>
       <label for="bio">Bio</label>
