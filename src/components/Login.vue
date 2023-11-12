@@ -1,17 +1,17 @@
 <template>
     <div>
-      <h2>Sign in to your account</h2>
-      <form @submit.prevent="handleSignin">
-        <div>
-          <label for="email">Email</label>
-          <input id="email" type="email" v-model="email" />
+      <h2 class="text-center">Sign in to your account</h2>
+      <form @submit.prevent="handleSignin" class="container">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input id="email" type="email" v-model="email" class="form-control"/>
         </div>
-        <div>
-          <label for="password">Password</label>
-          <input id="password" type="password" v-model="password" />
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input id="password" type="password" v-model="password" class="form-control"/>
         </div>
-        <div>
-          <button type="submit">Sign in</button>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary btn-block m-4">Sign in</button>
         </div>
       </form>
     </div>
@@ -20,11 +20,15 @@
   <script>
   import { ref } from "vue";
   import { supabase } from "../supabase";
+  import { useRouter } from 'vue-router'
+
   
   export default {
     setup() {
       const email = ref("");
       const password = ref("");
+      const router = useRouter()
+
   
       const handleSignin = async () => {
         try {
@@ -33,7 +37,10 @@
             email: email.value,
             password: password.value,
           });
+
+          
           if (error) throw error;
+          router.push('/hello-world')
         } catch (error) {
           alert(error.error_description || error.message);
         }

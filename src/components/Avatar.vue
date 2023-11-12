@@ -50,7 +50,7 @@ watch(path, () => {
 </script>
 
 <template>
-  <div>
+  <div class="text-center">
     <img
       v-if="src"
       :src="src"
@@ -62,7 +62,7 @@ watch(path, () => {
 
     <div :style="{ width: size + 'em' }">
       <label class="button primary block" for="single-avatar">
-        {{ uploading ? 'Uploading ...' : 'Upload' }}
+        {{ uploading ? 'Uploading ...' : 'Upload Profile Picture:' }}
       </label>
       <input
         style="visibility: hidden; position: absolute"

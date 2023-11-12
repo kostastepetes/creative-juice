@@ -2,7 +2,8 @@
     <div>
       <Register v-if="isSignUp" />
       <Login v-else />
-      <button @click="isSignUp = !isSignUp">
+      <div class="text-center">
+      <button @click="isSignUp = !isSignUp" class="btn btn-secondary btn-block">
         {{
           isSignUp
             ? "Already have an account? Sign In"
@@ -10,12 +11,14 @@
         }}
       </button>
     </div>
+    </div>
   </template>
   
   <script>
   import { ref } from "vue";
   import Register from "./Register.vue";
   import Login from "./Login.vue";
+  
   export default {
     components: { Register, Login },
     setup() {
