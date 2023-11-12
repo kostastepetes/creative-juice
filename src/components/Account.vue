@@ -119,8 +119,8 @@ async function signOut() {
     </div>
     <div class="form-group m-2">
       <label for="job">Occupation:</label>
-      <select id="job" type="text" v-model="job" class="form-control">
-        <option selected disabled>Select the title that applies to you</option>
+      <select id="job" v-model="job" class="form-select">
+        <option value="" disabled>Select the title that applies to you</option>
         <option value="3D Art">3D Art</option>
         <option value="Game Design">Game Design</option>
         <option value="Acting">Acting</option>
