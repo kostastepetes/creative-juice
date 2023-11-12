@@ -15,7 +15,7 @@ async function signOut() {
 
   <div class="card">
 
-    <button @click="signOut">Sign Out</button>
+    <button class="btn btn-primary" @click="signOut">Sign Out</button>
   </div>
 </template>
 

@@ -104,21 +104,21 @@ async function signOut() {
 </script>
 
 <template>
-  <form class="form-widget" @submit.prevent="updateProfile">
+  <form class="form-widget container" @submit.prevent="updateProfile">
     <Avatar v-model:path="avatar_url" @upload="updateProfile" size="10" />
 
     <BackgroundImage v-model:path="background_url" @upload="updateProfile" size="10" />
-    <div>
+    <div class="form-group">
       <label for="email">Email</label>
-      <input id="email" type="text" :value="session.user.email" disabled />
+      <input id="email" type="text" :value="session.user.email" disabled class="form-control"/>
     </div> 
-    <div>
+    <div class="form-group">
       <label for="username">Name</label>
-      <input id="username" type="text" v-model="username" />
+      <input id="username" type="text" v-model="username" class="form-control"/>
     </div>
-    <div>
+    <div class="form-group">
       <label for="job">Occupation</label>
-      <select id="job" type="text" v-model="job" multiple>
+      <select id="job" type="text" v-model="job" multiple class="form-control">
         <option value="3D Art">3D Art</option>
         <option value="Game Design">Game Design</option>
         <option value="Acting">Acting</option>
@@ -151,38 +151,38 @@ async function signOut() {
         <option value="Other">Other</option>
 </select>
     </div>
-    <div>
+    <div class="form-group">
       <label for="bio">Bio</label>
-      <textarea id="bio" type="text" v-model="bio" />
+      <textarea id="bio" type="text" v-model="bio" class="form-control"/>
     </div>
-    <div>
+    <div class="form-group">
       <label for="project_url1">Project URL 1</label>
-      <input id="project_url1" type="url" v-model="project_url1" />
+      <input id="project_url1" type="url" v-model="project_url1" class="form-control"/>
     </div>
-    <div>
+    <div class="form-group">
       <label for="project_url2">Project URL 2</label>
-      <input id="project_url2" type="url" v-model="project_url2" />
+      <input id="project_url2" type="url" v-model="project_url2" class="form-control"/>
     </div>
-    <div>
+    <div class="form-group">
       <label for="project_url3">Project URL 3</label>
-      <input id="project_url3" type="url" v-model="project_url3" />
+      <input id="project_url3" type="url" v-model="project_url3" class="form-control"/>
     </div>
-    <div>
+    <div class="form-group">
       <label for="portfolio">Portfolio Website URL</label>
-      <input id="portfolio" type="url" v-model="portfolio" />
+      <input id="portfolio" type="url" v-model="portfolio" class="form-control"/>
     </div>
 
     <div>
       <input
         type="submit"
-        class="button primary block"
+        class="btn btn-primary btn-block"
         :value="loading ? 'Loading ...' : 'Update'"
         :disabled="loading"
       />
     </div>
 
-    <div>
-      <button class="button block" @click="signOut" :disabled="loading">Sign Out</button>
+    <div class="form-group">
+      <button class="btn btn-secondary btn-block" @click="signOut" :disabled="loading">Sign Out</button>
     </div>
   </form>
 </template>
