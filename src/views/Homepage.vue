@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { supabase } from "../supabase";
 import { useRouter } from 'vue-router'
+import Navbar from '../components/Navbar.vue'
 
 const router = useRouter()
 
@@ -12,9 +13,8 @@ async function signOut() {
 </script>
 
 <template>
-
-  <div class="text-center">
-
+  <Navbar />
+  <div class="text-center m-4">
     <button class="btn btn-primary" @click="signOut">Sign Out</button>
   </div>
 </template>

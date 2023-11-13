@@ -16,8 +16,8 @@
   
   <script>
   import { ref } from "vue";
-  import Register from "./Register.vue";
-  import Login from "./Login.vue";
+  import Register from "../components/Register.vue";
+  import Login from "../components/Login.vue";
   
   export default {
     components: { Register, Login },
