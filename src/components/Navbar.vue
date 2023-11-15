@@ -16,7 +16,7 @@
               <a class="nav-link" href="#">Discover</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item" v-if="session">
               <a class="nav-link" href="/profile">Profile</a>
