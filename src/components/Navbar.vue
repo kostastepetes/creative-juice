@@ -18,7 +18,13 @@
             <li class="nav-item">
               <a class="nav-link" href="#">About</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="session">
+              <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item" v-if="session">
+              <button class="btn btn-primary" @click="signOut">Sign Out</button>
+            </li>
+            <li class="nav-item" v-else>
               <a class="nav-link active" href="/auth">Login/Register</a>
             </li>
           </ul>
@@ -28,9 +34,24 @@
   </template>
   
   <script>
-  export default {
-    name: 'Navbar'
+import { supabase } from "../supabase";
+import { useRouter } from "vue-router";
+
+export default {
+  name: 'Navbar',
+  props: ['session'],
+  setup() {
+    const router = useRouter();
+    return {
+      signOut: async () => {
+        const { error } = await supabase.auth.signOut();
+        if (!error) {
+          router.push('/auth');
+        }
+      }
+    };
   }
+};
   </script>
   
   <style scoped>

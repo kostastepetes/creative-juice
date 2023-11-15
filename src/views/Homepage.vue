@@ -1,26 +1,27 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { supabase } from "../supabase";
 import { useRouter } from 'vue-router'
 import Navbar from '../components/Navbar.vue'
 
 const router = useRouter()
+const session = ref()
 
-async function signOut() {
-  const { error } = await supabase.auth.signOut();
-  router.push('/auth')
-}
+onMounted(() => {
+  supabase.auth.getSession().then(({ data }) => {
+    session.value = data.session
+  })
+
+  supabase.auth.onAuthStateChange((_, _session) => {
+    session.value = _session
+  })
+})
 </script>
 
 <template>
-  <Navbar />
-  <div class="text-center m-4">
-    <button class="btn btn-primary" @click="signOut">Sign Out</button>
-  </div>
+  <Navbar :session="session"/>
+
 </template>
 
 <style scoped>
-.read-the-docs {
-  color: #888;
-}
 </style>
