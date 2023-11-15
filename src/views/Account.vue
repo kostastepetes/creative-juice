@@ -1,7 +1,7 @@
 <script setup>
 import { supabase } from '../supabase'
-import Avatar from './Avatar.vue'
-import BackgroundImage from './BackgroundImage.vue';
+import Avatar from '../components/Avatar.vue'
+import BackgroundImage from '../components/BackgroundImage.vue';
 import { onMounted, ref, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -80,7 +80,7 @@ async function updateProfile() {
 
     if (error) throw error
    // Redirect to HelloWorld component
-    router.push('/hello-world')
+    router.push('/')
   } catch (error) {
     alert(error.message)
   } finally {
@@ -104,7 +104,7 @@ async function signOut() {
 </script>
 
 <template>
-  <h2 class="text-center">Edit your Profile</h2>
+  <h2 class="text-center m-4">Edit your Profile</h2>
   <form class="form-widget container" @submit.prevent="updateProfile">
     <Avatar v-model:path="avatar_url" @upload="updateProfile" size="15" />
 
@@ -183,7 +183,7 @@ async function signOut() {
       />
     </div>
 
-    <div class="form-group text-center">
+    <div class="form-group text-center mb-4">
       <button class="btn btn-secondary btn-block" @click="signOut" :disabled="loading">Sign Out</button>
     </div>
   </form>

@@ -42,3 +42,13 @@ small {font-size: 0.750rem; /* 12px */}
 .btn:hover {
   filter: brightness(90%)!important; /* You can adjust the percentage to control the darkness on hover */
 }
+
+.bg-custom {
+  background-color: var(--primary)!important; /* Use custom secondary color variable */
+  padding: 0!important;
+}
+
+.navbar-brand {
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+}

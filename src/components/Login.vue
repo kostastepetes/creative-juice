@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h2 class="text-center">Sign in to your account</h2>
+      <h2 class="text-center m-4">Sign in to your account</h2>
       <form @submit.prevent="handleSignin" class="container">
         <div class="form-group">
           <label for="email">Email:</label>
@@ -40,7 +40,7 @@
 
           
           if (error) throw error;
-          router.push('/hello-world')
+          router.push('/')
         } catch (error) {
           alert(error.error_description || error.message);
         }
