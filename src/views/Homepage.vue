@@ -5,7 +5,8 @@ import { useRouter } from 'vue-router'
 import Navbar from '../components/Navbar.vue'
 import Section from '../components/Section.vue'
 import Infobar from '../components/Infobar.vue'
-import About from '../views/About.vue'
+import Info from '../components/Info.vue'
+import Footer from '../components/Footer.vue'
 
 const router = useRouter()
 const session = ref()
@@ -26,9 +27,8 @@ onMounted(() => {
   <Section headerText="Join the Creative Juice Community" subheaderText="Connect with creative people online or face-to-face over coffee." ctaText="Join"/>
   <Infobar :session="session" infoText="We're live in Patras, Greece" ctaText="Join our Beta"  url="/auth"/>
   <Infobar :session="session" infoText="Live somewhere else?" ctaText="Join the Waitlist" url="#" />
-  <About/>
-
-
+  <Info/>
+  <Footer/>
 </template>
 
 <style scoped>

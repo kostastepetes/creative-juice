@@ -1,5 +1,4 @@
 <template>
-    <Navbar :session="session"/>
     <div class="container py-4">
       <div class="row mt-4 mb-4">
         <div class="col-lg-6">
@@ -29,34 +28,14 @@
         </div>
       </div>
     </div>
-
-    <Footer/>
   </template>
   
   <script>
   import { onMounted, ref } from "vue";
-  import { supabase } from "../supabase";
-  import Navbar from '../components/Navbar.vue';
-  import Footer from '../components/Footer.vue';
+
   
   export default {
-   name: 'About',
-   components: { Navbar, Footer },
-   setup() {
-     const session = ref(null);
-  
-     onMounted(() => {
-       supabase.auth.getSession().then(({ data }) => {
-         session.value = data.session;
-       });
-  
-       supabase.auth.onAuthStateChange((_, _session) => {
-         session.value = _session;
-       });
-     });
-  
-     return { session };
-   },
+   name: 'Info'
   };
   </script>
   
