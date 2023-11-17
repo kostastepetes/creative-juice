@@ -2,8 +2,8 @@
 import { ref, toRefs, watch } from 'vue'
 import { supabase } from '../supabase'
 
-const prop = defineProps(['path', 'size'])
-const { path, size } = toRefs(prop)
+const prop = defineProps(['path', 'size', 'hideUpload',])
+const { path, size, hideUpload } = toRefs(prop)
 
 const emit = defineEmits(['upload', 'update:path'])
 const uploading = ref(false)
@@ -56,11 +56,11 @@ watch(path, () => {
       :src="src"
       alt="background_image"
       class="background_image image"
-      :style="{ height: size + 'em', width: size + 'em' }"
+      :style="{ height: size + 'em', width: 100 + '%', objectFit: 'cover' }"
     />
-    <div v-else class="background_image no-image" :style="{ height: size + 'em', width: size + 'em' }" />
+    <div v-else class="background_image no-image" :style="{ height: size + 'em', width: 100 + '%', objectFit: 'cover' }" />
 
-    <div :style="{ width: size + 'em' }">
+    <div v-if="!hideUpload" :style="{ width: size + 'em' }">
       <label class="button primary block" for="single-background-image">
         {{ uploading ? 'Uploading ...' : 'Upload Background:' }}
       </label>
