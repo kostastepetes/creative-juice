@@ -19,7 +19,10 @@
               <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item" v-if="session">
-              <a class="nav-link" href="/profile">Profile <font-awesome-icon :icon="['far', 'user']" style="color: #000205;" /></a>
+              <a class="nav-link" href="/profile">Profile <font-awesome-icon :icon="['fas', 'user']" style="color: #000205;" /></a>
+            </li>
+            <li class="nav-item" v-if="session">
+              <a class="nav-link" href="/account">Edit <font-awesome-icon :icon="['fas', 'gear']" style="color: #000205;" /></a>
             </li>
             <li class="nav-item" v-if="session">
               <button class="btn btn-primary" @click="signOut">Sign Out <font-awesome-icon :icon="['fas', 'right-from-bracket']" style="color: #ffffff;" /></button>

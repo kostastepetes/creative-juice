@@ -7,6 +7,7 @@ import Account from './views/Account.vue'
 import Auth from './views/Auth.vue'
 import Homepage from './views/Homepage.vue'
 import About from './views/About.vue'
+import Profile from './views/Profile.vue'
 import App from './App.vue'
 
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
@@ -20,7 +21,8 @@ const routes = [
     { path: '/account', component: Account },
     { path: '/auth', component: Auth },
     { path: '/', component: Homepage },
-    { path: '/about', component: About }
+    { path: '/about', component: About },
+    { path: '/profile', component: Profile }
 ]
 
 const router = createRouter({

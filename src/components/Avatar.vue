@@ -2,8 +2,8 @@
 import { ref, toRefs, watch } from 'vue'
 import { supabase } from '../supabase'
 
-const prop = defineProps(['path', 'size'])
-const { path, size } = toRefs(prop)
+const prop = defineProps(['path', 'size', 'hideUpload',])
+const { path, size, hideUpload } = toRefs(prop)
 
 const emit = defineEmits(['upload', 'update:path'])
 const uploading = ref(false)
@@ -60,7 +60,7 @@ watch(path, () => {
     />
     <div v-else class="avatar no-image" :style="{ height: size + 'em', width: size + 'em' }" />
 
-    <div :style="{ width: size + 'em' }">
+    <div  v-if="!hideUpload" :style="{ width: size + 'em' }">
       <label class="button primary block" for="single-avatar">
         {{ uploading ? 'Uploading ...' : 'Upload Profile Picture:' }}
       </label>

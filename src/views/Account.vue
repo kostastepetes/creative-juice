@@ -79,8 +79,8 @@ async function updateProfile() {
     const { error } = await supabase.from('Profiles').upsert(updates)
 
     if (error) throw error
-   // Redirect to HelloWorld component
-    router.push('/')
+     // Redirect to /profile after successful update
+     router.push('/profile')
   } catch (error) {
     alert(error.message)
   } finally {
