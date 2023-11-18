@@ -80,7 +80,7 @@ async function updateProfile() {
 
     if (error) throw error
      // Redirect to /profile after successful update
-     router.push('/profile')
+     router.push('/')
   } catch (error) {
     alert(error.message)
   } finally {

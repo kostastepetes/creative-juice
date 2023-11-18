@@ -19,7 +19,7 @@
               <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item" v-if="session">
-              <a class="nav-link" href="/profile">Profile <font-awesome-icon :icon="['fas', 'user']" style="color: #000205;" /></a>
+              <router-link :to="`/${username}`" class="nav-link">Profile <font-awesome-icon :icon="['fas', 'user']" style="color: #000205;" /></router-link>
             </li>
             <li class="nav-item" v-if="session">
               <a class="nav-link" href="/account">Edit <font-awesome-icon :icon="['fas', 'gear']" style="color: #000205;" /></a>
@@ -36,26 +36,50 @@
     </nav>
   </template>
   
-  <script>
+  <script setup>
+import { ref, watch, toRefs } from 'vue'
 import { supabase } from "../supabase";
 import { useRouter } from "vue-router";
 
-export default {
-  name: 'Navbar',
-  props: ['session'],
-  setup() {
-    const router = useRouter();
-    return {
-      signOut: async () => {
-        const { error } = await supabase.auth.signOut();
-        if (!error) {
-          router.push('/auth');
-        }
-      }
-    };
+const props = defineProps(['session'])
+const { session } = toRefs(props)
+
+const username = ref('')
+
+watch(session, async (newSession) => {
+  if (newSession) {
+    const { user } = newSession
+
+    const { data, error } = await supabase
+      .from('Profiles')
+      .select('username')
+      .eq('id', user.id)
+      .single()
+
+    if (error) {
+      console.error('Error: ', error.message)
+      return
+    }
+
+    username.value = data.username
   }
-};
-  </script>
+}, { immediate: true })
+
+const router = useRouter();
+
+const signOut = async () => {
+  const { error } = await supabase.auth.signOut();
+  if (!error) {
+    router.push('/auth');
+  }
+}
+
+defineExpose({
+  username,
+  signOut
+})
+</script>
+  
   
   <style scoped>
   </style>
