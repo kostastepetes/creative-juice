@@ -20,9 +20,9 @@ library.add(fas, far, fab)
 const routes = [
     { path: '/account', component: Account },
     { path: '/auth', component: Auth },
-    { path: '/', component: Homepage },
     { path: '/about', component: About },
-    { path: '/profile', component: Profile }
+    { path: '/:username', component: Profile },
+    { path: '/', component: Homepage }
 ]
 
 const router = createRouter({

@@ -48,6 +48,7 @@
   
   <script setup>
   import { ref, onMounted, toRefs } from 'vue'
+  import { useRoute } from 'vue-router';
   import { supabase } from '../supabase'
   import Avatar from '../components/Avatar.vue'
   import BackgroundImage from '../components/BackgroundImage.vue'
@@ -69,6 +70,11 @@ const { session } = toRefs(props)
   
   onMounted(async () => {
     const { user } = session.value
+
+    const route = useRoute();
+    username.value = route.params.username;
+
+
     const { data, error } = await supabase
       .from('Profiles')
       .select(`username, bio, job, project_url1, project_url2, project_url3, portfolio, avatar_url, background_url`)
