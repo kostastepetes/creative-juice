@@ -8,6 +8,7 @@ import Auth from './views/Auth.vue'
 import Homepage from './views/Homepage.vue'
 import About from './views/About.vue'
 import Profile from './views/Profile.vue'
+import Community from './views/Community.vue'
 import App from './App.vue'
 
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
@@ -22,6 +23,7 @@ const routes = [
     { path: '/auth', component: Auth },
     { path: '/about', component: About },
     { path: '/:username', component: Profile },
+    { path: '/community', component: Community},
     { path: '/', component: Homepage }
 ]
 

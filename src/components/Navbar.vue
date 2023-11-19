@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link"  href="#">Community</a>
+              <a class="nav-link"  href="/community">Community</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Discover</a>
