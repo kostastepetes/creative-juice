@@ -88,6 +88,28 @@ async function updateProfile() {
   }
 }
 
+async function updateUser() {
+  try {
+    loading.value = true
+    const { user } = session.value
+
+    const updates = {
+      id: user.id,
+      username: username.value
+    }
+
+    const { error } = await supabase.from('Users').upsert(updates)
+
+    if (error) throw error
+     // Redirect to /profile after successful update
+     router.push('/')
+  } catch (error) {
+    alert(error.message)
+  } finally {
+    loading.value = false
+  }
+}
+
 async function signOut() {
   try {
     loading.value = true
@@ -101,11 +123,15 @@ async function signOut() {
   }
 }
 
+async function updateUserAndProfile() {
+  await updateUser();
+  await updateProfile();
+}
 </script>
 
 <template>
   <h2 class="text-center m-4">Edit your Profile</h2>
-  <form class="form-widget container" @submit.prevent="updateProfile">
+  <form class="form-widget container" @submit.prevent="updateUserAndProfile">
     <Avatar v-model:path="avatar_url" @upload="updateProfile" size="15" />
 
     <BackgroundImage v-model:path="background_url" @upload="updateProfile" size="15" />

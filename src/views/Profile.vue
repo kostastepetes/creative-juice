@@ -25,100 +25,33 @@
       </div>
 
       <div class="card m-2">
-        <div class="card-body">
-          <h5 class="card-title">Project 1</h5>
-          <vue-link-preview :url="project_url1" @click="handleClick">
-            <template v-slot:default="preview">
-              <div v-if="preview">
-                <p>Domain: {{ preview.domain }}</p>
-                <p>Title: {{ preview.title }}</p>
-                <p>Description: {{ preview.description }}</p>
-                <img
-                  height="100px"
-                  width="100px"
-                  :src="preview.img"
-                  :alt="preview.title "
-                />
-              </div>
-              <div v-else>
-                <a :href="project_url1" class="card-link">{{ project_url1 }}</a>
-              </div>
-            </template>
-          </vue-link-preview>
-        </div>
+          <div class="card-body">
+            <h5 class="card-title">Project 1</h5>
+            <a :href="project_url1" class="card-link">{{ project_url1 }}</a>
+          </div>
       </div>
 
       <div class="card m-2">
-        <div class="card-body">
-          <h5 class="card-title">Project 2</h5>
-          <vue-link-preview :url="project_url2" @click="handleClick">
-            <template v-slot:default="preview">
-              <div v-if="preview">
-                <p>Domain: {{ preview.domain }}</p>
-                <p>Title: {{ preview.title }}</p>
-                <p>Description: {{ preview.description }}</p>
-                <img
-                  height="100px"
-                  width="100px"
-                  :src="preview.img"
-                  :alt="preview.title "
-                />
-              </div>
-              <div v-else>
-                <a :href="project_url2" class="card-link">{{ project_url2 }}</a>
-              </div>
-            </template>
-          </vue-link-preview>
-        </div>
+          <div class="card-body">
+            <h5 class="card-title">Project 2</h5>
+            <a :href="project_url1" class="card-link">{{ project_url2 }}</a>
+          </div>
       </div>
 
       <div class="card m-2">
-        <div class="card-body">
-          <h5 class="card-title">Project 3</h5>
-          <vue-link-preview :url="project_url3" @click="handleClick">
-            <template v-slot:default="preview">
-              <div v-if="preview">
-                <p>Domain: {{ preview.domain }}</p>
-                <p>Title: {{ preview.title }}</p>
-                <p>Description: {{ preview.description }}</p>
-                <img
-                  height="100px"
-                  width="100px"
-                  :src="preview.img"
-                  :alt="preview.title "
-                />
-              </div>
-              <div v-else>
-                <a :href="project_url3" class="card-link">{{ project_url3 }}</a>
-              </div>
-            </template>
-          </vue-link-preview>
-        </div>
+          <div class="card-body">
+            <h5 class="card-title">Project 3</h5>
+            <a :href="project_url1" class="card-link">{{ project_url3 }}</a>
+          </div>
       </div>
 
       <div class="card m-2">
-        <div class="card-body">
-          <h5 class="card-title">Portfolio</h5>
-          <vue-link-preview :url="portfolio" @click="handleClick">
-            <template v-slot:default="preview">
-              <div v-if="preview">
-                <p>Domain: {{ preview.domain }}</p>
-                <p>Title: {{ preview.title }}</p>
-                <p>Description: {{ preview.description }}</p>
-                <img
-                  height="100px"
-                  width="100px"
-                  :src="preview.img"
-                  :alt="preview.title "
-                />
-              </div>
-              <div v-else>
-                <a :href="portfolio" class="card-link">{{ portfolio }}</a>
-              </div>
-            </template>
-          </vue-link-preview>
-        </div>
+          <div class="card-body">
+            <h5 class="card-title">Portfolio</h5>
+            <a :href="portfolio" class="card-link">{{ portfolio }}</a>
+          </div>
       </div>
+
     </div>
   </div>
 
@@ -126,14 +59,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, toRefs } from 'vue'
+import { ref, onMounted, onBeforeUnmount, toRefs, watch } from 'vue'
 import { useRoute } from 'vue-router';
 import { supabase } from '../supabase'
 import Avatar from '../components/Avatar.vue'
 import BackgroundImage from '../components/BackgroundImage.vue'
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
-import LinkPreview from "@ashwamegh/vue-link-preview";
 
 const username = ref('')
 const bio = ref('')
@@ -148,32 +80,56 @@ const background_url = ref('')
 const props = defineProps(['session'])
 const { session } = toRefs(props)
 
+let stopwatch = null
+
 onMounted(async () => {
-  const { user } = session.value
+  //const { user } = session.value
 
   const route = useRoute();
-  username.value = route.params.username;
+  stopWatch = watch(() => route.params.username, async (newUsername) => {
+  username.value = newUsername;
 
-  const { data, error } = await supabase
-    .from('Profiles')
-    .select(`username, bio, job, project_url1, project_url2, project_url3, portfolio, avatar_url, background_url`)
-    .eq('id', user.id)
-    .single()
+   // Fetch the user's ID using the username
+    const { data: userData, error: userError } = await supabase
+      .from('Users')
+      .select('id')
+      .eq('username', username.value)
+      .single()
 
-  if (error) {
-    console.error('Error: ', error.message)
-    return
+    if (userError) {
+      console.error('Error: ', userError.message)
+      return
+    }
+
+   // Fetch the profile data using the user's ID
+ const { data: profileData, error: profileError } = await supabase
+   .from('Profiles')
+   .select(`username, bio, job, project_url1, project_url2, project_url3, portfolio, avatar_url, background_url`)
+   .eq('id', userData.id)
+   .single()
+
+ if (profileError) {
+   console.error('Error: ', profileError.message)
+   return
+ }
+
+ // Assign the profile data to the reactive variables
+ username.value = profileData.username
+ bio.value = profileData.bio
+ job.value = profileData.job
+ project_url1.value = profileData.project_url1
+ project_url2.value = profileData.project_url2
+ project_url3.value = profileData.project_url3
+ portfolio.value = profileData.portfolio
+ avatar_url.value = profileData.avatar_url
+ background_url.value = profileData.background_url
+}, { immediate: true })
+})
+
+onBeforeUnmount(() => {
+  if (stopWatch) {
+    stopWatch()
   }
-
-  username.value = data.username
-  bio.value = data.bio
-  job.value = data.job
-  project_url1.value = data.project_url1
-  project_url2.value = data.project_url2
-  project_url3.value = data.project_url3
-  portfolio.value = data.portfolio
-  avatar_url.value = data.avatar_url
-  background_url.value = data.background_url
 })
 
 const handleClick = (preview) => {
