@@ -13,7 +13,7 @@
               <a class="nav-link"  href="/community">Community</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Discover</a>
+              <a class="nav-link" href="/discover">Discover</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/about">About</a>

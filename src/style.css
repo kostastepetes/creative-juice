@@ -34,6 +34,10 @@ h5 {font-size: 1.333rem; /* 21.28px */}
 
 small {font-size: 0.750rem; /* 12px */}
 
+p {
+  width: fit-content;
+}
+
 .btn-primary {
   background-color: var(--primary)!important; /* Use custom primary color variable */ 
   border-color: var(--primary)!important; /* Use custom primary color variable */
