@@ -144,7 +144,11 @@ const handleClick = (preview) => {
 </script>
 
 <style scoped>
-
+h1 {
+  width: fit-content!important;
+  margin: auto;
+  display: block;
+}
 .edit-profile-button{
   text-decoration: none;
   color: white;
@@ -154,7 +158,7 @@ const handleClick = (preview) => {
   border: solid 1px white;
 }
 .username-line {
-  background-color: #e19394;
+  backdrop-filter: blur(5px);
 }
 .profile-container {
 position: relative;
