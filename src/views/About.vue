@@ -3,7 +3,7 @@
     <div class="container py-4">
       <div class="row mt-4 mb-4">
         <div class="col-lg-6">
-          <img src="..\assets\undraw_coffee_with_friends_3cbj.svg" class="img-fluid" alt="Responsive image">
+          <img src="..\assets\Creative_Juice_Logo_4-removebg-preview.png" class="img-fluid" alt="Responsive image">
         </div>
         <div class="col-lg-6 d-flex flex-column justify-content-center">
           <h1>Our Vision</h1>

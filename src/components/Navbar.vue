@@ -19,13 +19,13 @@
               <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item" v-if="session">
-              <router-link :to="`/${username}`" class="nav-link">Profile <font-awesome-icon :icon="['fas', 'user']" style="color: #000205;" /></router-link>
+              <router-link :to="`/${username}`" class="nav-link"><font-awesome-icon :icon="['fas', 'user']" style="color: #000205;" /></router-link>
             </li>
             <li class="nav-item" v-if="session">
-              <a class="nav-link" href="/account">Edit <font-awesome-icon :icon="['fas', 'gear']" style="color: #000205;" /></a>
+              <a class="nav-link" href="/account"><font-awesome-icon :icon="['fas', 'gear']" style="color: #000205;" /></a>
             </li>
             <li class="nav-item" v-if="session">
-              <button class="btn btn-primary" @click="signOut">Sign Out <font-awesome-icon :icon="['fas', 'right-from-bracket']" style="color: #ffffff;" /></button>
+              <button class="btn btn-primary" @click="signOut"><font-awesome-icon :icon="['fas', 'right-from-bracket']" style="color: #000000;" /></button>
             </li>
             <li class="nav-item" v-else>
               <a class="nav-link active" href="/auth">Login/Register <font-awesome-icon :icon="['fas', 'right-from-bracket']" style="color: #000000;" /></a>
