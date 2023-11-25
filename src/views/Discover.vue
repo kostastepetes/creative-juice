@@ -7,6 +7,7 @@
         <option value="space">Creative Space</option>
         <option value="event">Events</option>
       </select>
+      <router-link to="/submit-location" class="btn btn-primary ml-2 mt-4">Submit a Place/Event</router-link>
       <div class="row mt-4">
         <div v-for="location in filteredLocations" :key="location.id" class="col-lg-4 col-md-6 mb-4">
           <div class="card h-100">
@@ -41,6 +42,7 @@
     let { data, error } = await supabase
       .from('Locations')
       .select('name, description, contact_info, address, imageUrl, city, type')
+      .eq('approved', true)
   
     if (error) {
       console.error('Error: ', error.message)
