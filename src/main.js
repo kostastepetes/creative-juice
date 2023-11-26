@@ -11,6 +11,7 @@ import Profile from './views/Profile.vue'
 import Community from './views/Community.vue'
 import Discover from './views/Discover.vue'
 import SubmitLocation from './views/SubmitLocation.vue'
+import Chat from './components/Chat.vue'
 import App from './App.vue'
 
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
@@ -28,6 +29,7 @@ const routes = [
     { path: '/community', component: Community},
     { path: '/discover', component: Discover},
     { path: '/submit-location', component: SubmitLocation},
+    { path: '/chat/:username', component: Chat, name: 'Chat' },
     { path: '/', component: Homepage }
 ]
 

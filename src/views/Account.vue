@@ -21,6 +21,9 @@ const job = ref('')
 const avatar_url = ref('')
 const background_url = ref('')
 
+const goBack = () => {
+  router.go(-1) // Go back to the previous page
+}
 
 onMounted(() => {
   getProfile()
@@ -132,9 +135,9 @@ async function updateUserAndProfile() {
 <template>
   <h2 class="text-center m-4">Edit your Profile</h2>
   <form class="form-widget container" @submit.prevent="updateUserAndProfile">
-    <Avatar v-model:path="avatar_url" @upload="updateProfile" size="15" />
+    <Avatar v-model:path="avatar_url" size="15" />
 
-    <BackgroundImage v-model:path="background_url" @upload="updateProfile" size="15" />
+    <BackgroundImage v-model:path="background_url" size="15" />
     <div class="form-group m-2">
       <label for="email">Email:</label>
       <input id="email" type="text" :value="session.user.email" disabled class="form-control"/>
@@ -207,6 +210,10 @@ async function updateUserAndProfile() {
         :value="loading ? 'Loading ...' : 'Update'"
         :disabled="loading"
       />
+    </div>
+
+    <div class="text-center">
+      <button @click="goBack" class="btn btn-primary mb-4">Go Back</button> 
     </div>
 
     <div class="form-group text-center mb-4">

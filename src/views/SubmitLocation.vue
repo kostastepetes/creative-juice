@@ -36,7 +36,10 @@
     </div>
       <div class="text-center">
       <button type="submit" class="btn btn-primary mt-2">Submit</button>
-    </div>
+      </div>
+      <div class="text-center">
+      <button @click="goBack" class="btn btn-primary mt-4">Go Back</button>
+      </div>
     </form>
     <div v-else>
       <h5 class="text-center m-4">Thank you for your submission. After reviewing it, we will make sure to get it featured.</h5>
@@ -46,6 +49,7 @@
   <script setup>
   import { ref } from 'vue'
   import { supabase } from '../supabase'
+  import { useRouter } from 'vue-router'
   
   let location = ref({
     name: '',
@@ -59,6 +63,7 @@
   })
 
   let submitted = ref(false)
+  const router = useRouter()
   
   const submitForm = async () => {
     let { error } = await supabase
@@ -81,4 +86,8 @@
       submitted.value = true
     }
   }
+
+  const goBack = () => {
+  router.go(-1) // Go back to the previous page
+}
   </script>
