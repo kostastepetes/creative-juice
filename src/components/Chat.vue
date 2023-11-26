@@ -58,26 +58,46 @@
       .channel('Chats')
       .on('INSERT', payload => {
         if (payload.new.recipient === username.value) {
-          messages.value.unshift(payload.new)
+          messages.value = [...messages.value, payload.new]
         }
       })
       .subscribe()
   })
   
+  const getUsername = async (id) => {
+  let { data, error } = await supabase
+    .from('Users')
+    .select('username')
+    .eq('id', id)
+    .single()
+
+  if (error) {
+    console.error('Error: ', error.message)
+    return
+  }
+
+  return data.username
+  }
+
   const sendMessage = async () => {
     if (newMessage.value.trim() === '') {
       return
     }
+    
+    let sender = await getUsername(session.value.user.id)
   
     let { error } = await supabase
       .from('Chats')
-      .insert([{ message: newMessage.value, username: session.value.user.email, recipient: username.value }])
+      .insert([{ message: newMessage.value, username: sender, recipient: username.value }])
   
     if (error) {
       console.error('Error: ', error.message)
     }
   
     newMessage.value = ''
+
+      // Refresh the page
+      window.location.reload()
   }
   
   onUnmounted(() => {
