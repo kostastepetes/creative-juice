@@ -21,6 +21,9 @@ const job = ref('')
 const avatar_url = ref('')
 const background_url = ref('')
 
+const goBack = () => {
+  router.go(-1) // Go back to the previous page
+}
 
 onMounted(() => {
   getProfile()
@@ -207,6 +210,10 @@ async function updateUserAndProfile() {
         :value="loading ? 'Loading ...' : 'Update'"
         :disabled="loading"
       />
+    </div>
+
+    <div class="text-center">
+      <button @click="goBack" class="btn btn-primary mb-4">Go Back</button> 
     </div>
 
     <div class="form-group text-center mb-4">

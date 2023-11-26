@@ -6,7 +6,7 @@
           <div v-for="message in messages" :key="message.id" class="message mb-3">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title"><strong>{{ message.username }}</strong></h5>
+                <h5 class="card-title"><strong>{{ message.sender }}</strong></h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{ new Date(message.timestamp).toLocaleString() }}</h6>
                 <p class="card-text">{{ message.message }}</p>
               </div>
@@ -88,7 +88,7 @@
   
     let { error } = await supabase
       .from('Chats')
-      .insert([{ message: newMessage.value, username: sender, recipient: username.value }])
+      .insert([{ message: newMessage.value, sender: sender, recipient: username.value }])
   
     if (error) {
       console.error('Error: ', error.message)
