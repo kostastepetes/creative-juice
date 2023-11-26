@@ -10,6 +10,7 @@
     </div>
 
     <div class="info-container m-4">
+      <router-link :to="{ name: 'Chat', params: { username: route.params.username } }" class="btn btn-primary">Messages</router-link>
       <div class="card m-2">
         <div class="card-body">
           <h5 class="card-title">Bio</h5>
@@ -67,6 +68,8 @@ import BackgroundImage from '../components/BackgroundImage.vue'
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 
+const route = useRoute();
+
 const username = ref('')
 const bio = ref('')
 const job = ref('')
@@ -80,12 +83,14 @@ const background_url = ref('')
 const props = defineProps(['session'])
 const { session } = toRefs(props)
 
-let stopwatch = null
+
+
+let stopWatch = null
 
 onMounted(async () => {
   //const { user } = session.value
 
-  const route = useRoute();
+  //const route = useRoute();
   stopWatch = watch(() => route.params.username, async (newUsername) => {
   username.value = newUsername;
 
@@ -131,16 +136,6 @@ onBeforeUnmount(() => {
     stopWatch()
   }
 })
-
-const handleClick = (preview) => {
-  console.log(
-    "click",
-    preview.domain,
-    preview.title,
-    preview.description,
-    preview.img
-  );
-}
 </script>
 
 <style scoped>

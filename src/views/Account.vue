@@ -132,9 +132,9 @@ async function updateUserAndProfile() {
 <template>
   <h2 class="text-center m-4">Edit your Profile</h2>
   <form class="form-widget container" @submit.prevent="updateUserAndProfile">
-    <Avatar v-model:path="avatar_url" @upload="updateProfile" size="15" />
+    <Avatar v-model:path="avatar_url" size="15" />
 
-    <BackgroundImage v-model:path="background_url" @upload="updateProfile" size="15" />
+    <BackgroundImage v-model:path="background_url" size="15" />
     <div class="form-group m-2">
       <label for="email">Email:</label>
       <input id="email" type="text" :value="session.user.email" disabled class="form-control"/>
