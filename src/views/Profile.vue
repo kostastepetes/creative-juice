@@ -10,7 +10,7 @@
     </div>
 
     <div class="info-container m-4">
-      <router-link :to="{ name: 'Chat', params: { username: route.params.username } }" class="btn btn-primary">Messages</router-link>
+      <router-link :to="{ name: 'Chat', params: { username: route.params.username } }" class="btn btn-primary" :class="{ 'new-messages': hasNewMessages }" @click="goToChat">Messages</router-link>
       <div class="card m-2">
         <div class="card-body">
           <h5 class="card-title">Bio</h5>
@@ -60,8 +60,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, toRefs, watch } from 'vue'
-import { useRoute } from 'vue-router';
+import { ref, onMounted, onBeforeUnmount, toRefs, provide, watch, nextTick } from 'vue'
+import { useRoute, useRouter } from 'vue-router';
 import { supabase } from '../supabase'
 import Avatar from '../components/Avatar.vue'
 import BackgroundImage from '../components/BackgroundImage.vue'
@@ -69,6 +69,7 @@ import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 
 const route = useRoute();
+const router = useRouter();
 
 const username = ref('')
 const bio = ref('')
@@ -80,21 +81,45 @@ const portfolio = ref('')
 const avatar_url = ref('')
 const background_url = ref('')
 
+const hasNewMessages = ref(false)
+
 const props = defineProps(['session'])
 const { session } = toRefs(props)
 
-
-
 let stopWatch = null
+let messageCheckInterval = null
+
+const checkForNewMessages = async () => {
+  if (session.value) {
+    const { data: userData, error: userError } = await supabase
+      .from('Users')
+      .select('username')
+      .eq('id', session.value.user.id)
+      .single()
+
+    if (userError) {
+      console.error('Error: ', userError.message)
+      return
+    }
+
+    const { data: messagesData, error: messagesError } = await supabase
+      .from('Chats')
+      .select('id')
+      .eq('recipient', userData.username)
+      .or('read.eq.false,read.is.null')
+
+    if (messagesError) {
+      console.error('Error: ', messagesError.message)
+      return
+    }
+
+    hasNewMessages.value = messagesData.length > 0
+  }
+}
 
 onMounted(async () => {
-  //const { user } = session.value
-
-  //const route = useRoute();
   stopWatch = watch(() => route.params.username, async (newUsername) => {
-  username.value = newUsername;
-
-   // Fetch the user's ID using the username
+    username.value = newUsername;
     const { data: userData, error: userError } = await supabase
       .from('Users')
       .select('id')
@@ -106,36 +131,56 @@ onMounted(async () => {
       return
     }
 
-   // Fetch the profile data using the user's ID
- const { data: profileData, error: profileError } = await supabase
-   .from('Profiles')
-   .select(`username, bio, job, project_url1, project_url2, project_url3, portfolio, avatar_url, background_url`)
-   .eq('id', userData.id)
-   .single()
+    const { data: profileData, error: profileError } = await supabase
+      .from('Profiles')
+      .select(`username, bio, job, project_url1, project_url2, project_url3, portfolio, avatar_url, background_url`)
+      .eq('id', userData.id)
+      .single()
 
- if (profileError) {
-   console.error('Error: ', profileError.message)
-   return
- }
+    if (profileError) {
+      console.error('Error: ', profileError.message)
+      return
+    }
 
- // Assign the profile data to the reactive variables
- username.value = profileData.username
- bio.value = profileData.bio
- job.value = profileData.job
- project_url1.value = profileData.project_url1
- project_url2.value = profileData.project_url2
- project_url3.value = profileData.project_url3
- portfolio.value = profileData.portfolio
- avatar_url.value = profileData.avatar_url
- background_url.value = profileData.background_url
-}, { immediate: true })
+    username.value = profileData.username
+    bio.value = profileData.bio
+    job.value = profileData.job
+    project_url1.value = profileData.project_url1
+    project_url2.value = profileData.project_url2
+    project_url3.value = profileData.project_url3
+    portfolio.value = profileData.portfolio
+    avatar_url.value = profileData.avatar_url
+    background_url.value = profileData.background_url
+
+    // Check if the logged-in user is viewing their own profile
+    if (session.value.user.id === userData.id) {
+      // Run the checkForNewMessages function and provide the hasNewMessages variable
+      messageCheckInterval = setInterval(checkForNewMessages, 2000);
+      provide('hasNewMessages', hasNewMessages);
+    }
+  }, { immediate: true })
+})
+
+watch(() => route.params.username, (newUsername) => {
+  if (newUsername) {
+    messageCheckInterval = setInterval(checkForNewMessages, 2000);
+  }
 })
 
 onBeforeUnmount(() => {
   if (stopWatch) {
     stopWatch()
   }
+  clearInterval(messageCheckInterval);
 })
+
+const goToChat = () => {
+  hasNewMessages.value = false
+  clearInterval(messageCheckInterval)
+  nextTick(() => {
+    router.push({ name: 'Chat', params: { username: route.params.username } })
+  })
+}
 </script>
 
 <style scoped>
@@ -174,5 +219,9 @@ z-index: 1;
 .info-container {
 position: relative;
 z-index: 1;
+}
+
+.new-messages {
+  background-color: red!important;
 }
 </style>
