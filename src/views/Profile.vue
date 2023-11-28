@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, toRefs, watch, nextTick } from 'vue'
+import { ref, onMounted, onBeforeUnmount, toRefs, provide, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 import { supabase } from '../supabase'
 import Avatar from '../components/Avatar.vue'
@@ -91,7 +91,6 @@ let messageCheckInterval = null
 
 const checkForNewMessages = async () => {
   if (session.value) {
-    // Fetch the username using the user's ID
     const { data: userData, error: userError } = await supabase
       .from('Users')
       .select('username')
@@ -103,11 +102,11 @@ const checkForNewMessages = async () => {
       return
     }
 
-    // Use the fetched username to query the 'Chats' table
     const { data: messagesData, error: messagesError } = await supabase
       .from('Chats')
       .select('id')
       .eq('recipient', userData.username)
+      .or('read.eq.false,read.is.null')
 
     if (messagesError) {
       console.error('Error: ', messagesError.message)
@@ -120,9 +119,7 @@ const checkForNewMessages = async () => {
 
 onMounted(async () => {
   stopWatch = watch(() => route.params.username, async (newUsername) => {
-  username.value = newUsername;
-
-   // Fetch the user's ID using the username
+    username.value = newUsername;
     const { data: userData, error: userError } = await supabase
       .from('Users')
       .select('id')
@@ -134,38 +131,39 @@ onMounted(async () => {
       return
     }
 
-   // Fetch the profile data using the user's ID
- const { data: profileData, error: profileError } = await supabase
-   .from('Profiles')
-   .select(`username, bio, job, project_url1, project_url2, project_url3, portfolio, avatar_url, background_url`)
-   .eq('id', userData.id)
-   .single()
+    const { data: profileData, error: profileError } = await supabase
+      .from('Profiles')
+      .select(`username, bio, job, project_url1, project_url2, project_url3, portfolio, avatar_url, background_url`)
+      .eq('id', userData.id)
+      .single()
 
- if (profileError) {
-   console.error('Error: ', profileError.message)
-   return
- }
+    if (profileError) {
+      console.error('Error: ', profileError.message)
+      return
+    }
 
- // Assign the profile data to the reactive variables
- username.value = profileData.username
- bio.value = profileData.bio
- job.value = profileData.job
- project_url1.value = profileData.project_url1
- project_url2.value = profileData.project_url2
- project_url3.value = profileData.project_url3
- portfolio.value = profileData.portfolio
- avatar_url.value = profileData.avatar_url
- background_url.value = profileData.background_url
-}, { immediate: true })
+    username.value = profileData.username
+    bio.value = profileData.bio
+    job.value = profileData.job
+    project_url1.value = profileData.project_url1
+    project_url2.value = profileData.project_url2
+    project_url3.value = profileData.project_url3
+    portfolio.value = profileData.portfolio
+    avatar_url.value = profileData.avatar_url
+    background_url.value = profileData.background_url
 
-  // Add this watcher to check for new messages
-  messageCheckInterval = setInterval(checkForNewMessages, 5000); // Check for new messages every 5 seconds
+    // Check if the logged-in user is viewing their own profile
+    if (session.value.user.id === userData.id) {
+      // Run the checkForNewMessages function and provide the hasNewMessages variable
+      messageCheckInterval = setInterval(checkForNewMessages, 2000);
+      provide('hasNewMessages', hasNewMessages);
+    }
+  }, { immediate: true })
 })
 
 watch(() => route.params.username, (newUsername) => {
-  // If we're navigating back to the profile page, set up the interval again
   if (newUsername) {
-    messageCheckInterval = setInterval(checkForNewMessages, 5000);
+    messageCheckInterval = setInterval(checkForNewMessages, 2000);
   }
 })
 
