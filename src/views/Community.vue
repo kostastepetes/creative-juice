@@ -1,6 +1,7 @@
 <template>
     <Navbar :session="session"/>
     <div class="container">
+      <button class="btn btn-primary mt-4" @click="goToCoffeeRequest">Request a Meetup over Coffee</button>
       <input v-model="search" type="text" placeholder="Search profiles..." class="form-control my-3">
       <label for="job">Occupation:</label>
       <select id="job" v-model="job" class="form-select">
@@ -58,11 +59,14 @@
   import { supabase } from '../supabase'
   import Navbar from '../components/Navbar.vue';
   import Footer from '../components/Footer.vue';
+  import { useRouter } from 'vue-router';
   
   let profiles = ref([])
   let search = ref('')
   let job = ref('')
   let src = ref(null)
+
+  const router = useRouter();
 
   const session = ref(null);
   
@@ -119,7 +123,9 @@ const downloadImage = async (profile) => {
  }
 }
 
-
+const goToCoffeeRequest = () => {
+      router.push({ name: 'CoffeeRequest' });
+    };
   </script>
   
   <style scoped>
