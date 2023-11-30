@@ -1,4 +1,5 @@
 <template>
+  <div v-if="!requestSent">
     <div class="coffee-request container mt-4">
       <h1 class="mb-4 text-center">Coffee Request</h1>
       <h4 class="mb-4 text-center">Fill out the following form and schedule a meetup over coffee with another creative. A coffee request will be send in the chat of the selected person. Wait for their response.</h4>
@@ -26,9 +27,16 @@
       <div class="text-center mt-2">
       <button @click="sendRequest" class="btn btn-primary">Send Request</button>
       </div>
+      <div class="text-center mt-4">
+      <button @click="goBack" class="btn btn-primary mb-4">Go Back</button> 
     </div>
+    </div>
+  </div>
+  <div v-else>
+    <h4 class="mb-4 text-center mt-5">Your coffee request has been sent, hold tight and keep an eye on your Messages for a response!</h4>
     <div class="text-center mt-4">
       <button @click="goBack" class="btn btn-primary mb-4">Go Back</button> 
+    </div>
     </div>
   </template>
   
@@ -48,6 +56,8 @@ const props = defineProps(['session'])
 const { session } = toRefs(props)
 
 const router = useRouter()
+
+const requestSent = ref(false);
 
 const goBack = () => {
   router.go(-1) // Go back to the previous page
@@ -97,7 +107,7 @@ const sendRequest = async () => {
 
 let sender = await getUsername(session.value.user.id)
   // Generate the chat message
-  const chatMessage = `[AUTO-GENERATED] Coffee Request: The user ${sender} wants to meetup over coffee at ${selectedLocation.value.name} on ${selectedDateTime.value}. Please respond to them as soon as possible. Additional message: ${additionalMessage.value}`;
+  const chatMessage = `[AUTO-GENERATED] Coffee Request: The user ${sender} wants to meetup over coffee at ${selectedLocation.value.name} on ${selectedDateTime.value}. Please visit their profile and respond to them as soon as possible. Additional message: ${additionalMessage.value}`;
 
   // Send the chat message to the selected user
   let { error } = await supabase
@@ -106,6 +116,19 @@ let sender = await getUsername(session.value.user.id)
 
   if (error) {
     console.error('Error: ', error.message);
+  }
+
+    // Write the coffee request to the "Coffee Requests" table
+  let { error: coffeeRequestError } = await supabase
+    .from('Coffee Requests')
+    .insert([{ message: chatMessage, sender: sender, receiver: selectedUser.value.username, location: selectedLocation.value.name }]);
+
+  if (coffeeRequestError) {
+    console.error('Error: ', coffeeRequestError.message);
+  }
+
+    if (!error) {
+    requestSent.value = true;
   }
 };
 
