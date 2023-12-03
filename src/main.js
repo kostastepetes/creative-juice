@@ -13,6 +13,7 @@ import Discover from './views/Discover.vue'
 import SubmitLocation from './views/SubmitLocation.vue'
 import Chat from './components/Chat.vue'
 import CoffeeRequest from './components/CoffeeRequest.vue'
+import Waitlist from './components/Waitlist.vue'
 import App from './App.vue'
 
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
@@ -32,6 +33,7 @@ const routes = [
     { path: '/submit-location', component: SubmitLocation},
     { path: '/chat/:username', component: Chat, name: 'Chat' },
     { path: '/coffee-request', component: CoffeeRequest, name: 'CoffeeRequest' },
+    { path: '/waitlist', component: Waitlist, name: 'Waitlist' },
     { path: '/', component: Homepage }
 ]
 

@@ -26,7 +26,7 @@ onMounted(() => {
   <Navbar :session="session"/>
   <Section headerText="Join the Creative Juice Community" subheaderText="Connect with creative people online or face-to-face over coffee." ctaText="Join"/>
   <Infobar :session="session" infoText="We're live in Patras, Greece" ctaText="Join our Beta"  url="/auth"/>
-  <Infobar :session="session" infoText="Live somewhere else?" ctaText="Join the Waitlist" url="#" />
+  <Infobar :session="session" infoText="Live somewhere else?" ctaText="Join the Waitlist" url="/waitlist" />
   <Info/>
   <Footer/>
 </template>
