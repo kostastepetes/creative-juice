@@ -108,14 +108,14 @@ onMounted(async () => {
 
 const downloadImage = async (profile) => {
  try {
-   const bucketName = 'avatars'; // replace with your bucket name
+   const bucketName = 'avatars'; 
    const filePath = profile.avatar_url;
    const fullPath = `${bucketName}/${filePath}`;
 
-   console.log('fullPath:', fullPath) // add this line
+   console.log('fullPath:', fullPath) 
    const { data, error } = supabase.storage.from('avatars').getPublicUrl(filePath)
-   console.log('publicURL:', data.publicUrl) // add this line
-   console.log('error:', error) // add this line
+   console.log('publicURL:', data.publicUrl) 
+   console.log('error:', error) 
    if (error) throw error
    return data.publicUrl// use data.publicUrl instead of publicURL
  } catch (error) {
