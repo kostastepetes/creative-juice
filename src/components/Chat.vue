@@ -22,6 +22,8 @@
   </template>
   
   <script setup>
+// The provided code is a Vue script that contains the logic for a chat component. Here is a breakdown
+// of what each part of the code does:
 import { ref, onMounted, onUnmounted, inject, toRefs } from 'vue'
 import { supabase } from '../supabase'
 import { useRoute, useRouter } from 'vue-router'
