@@ -10,7 +10,7 @@
     </div>
 
     <div class="info-container m-4">
-      <router-link :to="{ name: 'Chat', params: { username: route.params.username } }" class="btn btn-primary" :class="{ 'new-messages': hasNewMessages }" @click="goToChat">Messages</router-link>
+      <router-link  v-if="session" :to="{ name: 'Chat', params: { username: route.params.username } }" class="btn btn-primary" :class="{ 'new-messages': hasNewMessages }" @click="goToChat">Messages</router-link>
       <div class="card m-2">
         <div class="card-body">
           <h5 class="card-title">Bio</h5>
