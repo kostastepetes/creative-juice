@@ -12,7 +12,7 @@ Creative Juice is an online platform that different creative people can join and
 <br />
 <div align="center">
   <a href="https://github.com/kostastepetes/creative-juice">
-    <img src="src\assets\Creative_Juice_Logo-removebg-preview.png" alt="Logo" width="300" height="300">
+    <img src="src\assets\Creative Juice Logo 4.png" alt="Logo" width="300" height="300">
   </a>
 
   <h3 align="center">Creative Juice</h3>
