@@ -304,7 +304,7 @@ import CoffeeRequest from './components/CoffeeRequest.vue'
 import Waitlist from './components/Waitlist.vue'
 import App from './App.vue'`
 
-In the above code, several Vue.js components are imported. These components are used to build the application's user interface. The `createApp` function is imported from Vue.js to create the application instance. The `createRouter` and `createWebHistory` functions are imported from `vue-router` to set up routing. The `style.css` and `bootstrap.min.css` files are imported for styling. The `App.vue` file is the root component of the application **[1](https://vuejs.org/guide/essentials/application.html)**, **[2](https://vuejs.org/api/application.html)**, **[5](https://www.techiediaries.com/vue-3-tutorial/)**.
+In the above code, several Vue.js components are imported. These components are used to build the application's user interface. The `createApp` function is imported from Vue.js to create the application instance. The `createRouter` and `createWebHistory` functions are imported from `vue-router` to set up routing. The `style.css` and `bootstrap.min.css` files are imported for styling. The `App.vue` file is the root component of the application.
 
 `import { library, dom } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -313,7 +313,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas, far, fab)`
 
-This code imports the Font Awesome library and adds the solid, regular, and brand icons to the library. The `FontAwesomeIcon` component is imported to use the icons in the Vue.js components **[1](https://vuejs.org/guide/essentials/application.html)**.
+This code imports the Font Awesome library and adds the solid, regular, and brand icons to the library. The `FontAwesomeIcon` component is imported to use the icons in the Vue.js components.
 
 `const routes = [
    { path: '/account', component: Account },
@@ -334,8 +334,7 @@ const router = createRouter({
  routes
 })`
 
-In this part, the application's routes are defined in an array. Each route is an object that maps a URL path to a Vue.js component. The `createRouter` function is used to create a router instance with the defined routes and the `createWebHistory` function for history mode **[1](https://vuejs.org/guide/essentials/application.html)**.
-
+In this part, the application's routes are defined in an array. Each route is an object that maps a URL path to a Vue.js component. The `createRouter` function is used to create a router instance with the defined routes and the `createWebHistory` function for history mode.
 `const app = createApp(App)
 app.use(router)
 app.component('font-awesome-icon', FontAwesomeIcon)
@@ -348,21 +347,6 @@ Finally, the Vue.js application is created with the root component `App.vue`. T
 **Section.vue**:
 
 The provided code is a Vue.js component that uses the GreenSock Animation Platform (GSAP) to animate elements on the page.
-
-`<template>
- <div class="container py-5">
-   <div class="row">
-     <div class="col-lg-6 d-flex flex-column justify-content-center" ref="col1">
-       <h1>{{ headerText }}</h1>
-       <p class="mt-2">{{ subheaderText }}</p>
-       <a href="/auth"> <button class="btn btn-primary btn-lg rounded-pill border-dark border-2 text-black" >{{ctaText}}</button></a>
-     </div>
-     <div class="col-lg-6" ref="col2">
-       <img src="..\assets\Creative_Juice_Logo-removebg-preview.png" class="img-fluid" alt="Responsive image">
-     </div>
-   </div>
- </div>
-</template>`
 
 In the template, a Bootstrap-styled layout is defined. The layout consists of two columns. The first column contains a header, subheader, and a call-to-action button. The second column contains an image. The `ref` attribute is used to create references to these columns. These references are used to animate the columns using GSAP.
 
@@ -396,19 +380,6 @@ In the `setup` function, two `ref` references are created for the two column
 **Infobar.vue:**
 
 The Infobar.vue is a Vue.js component that displays different content based on the `session` prop.
-
-`<template>
- <div v-if="session">
- </div>
- <div class="container-fluid bg-custom py-3 mb-2" v-else>
-  <div class="row m-0 justify-content-center ">
-    <div class="col-sm-8 col-md-6 d-flex align-items-center justify-content-center">
-      <p class="mb-0 me-3 text-black">{{ infoText }}</p>
-      <a :href="url"><button class="btn btn-primary btn-lg rounded-pill border-dark border-2 text-black">{{ ctaText }}</button></a>
-    </div>
-  </div>
- </div>
-</template>`
 
 In the template, two `div` elements are defined. The first `div` is rendered if the `session` prop is truthy (i.e., a user is logged in). The second `div` is rendered if the `session` prop is falsy (i.e., no user is logged in). The second `div` contains a paragraph and a button. The paragraph displays the `infoText` prop, and the button displays the `ctaText` prop and links to the URL specified by the `url` prop
 
