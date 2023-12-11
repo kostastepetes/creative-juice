@@ -23,7 +23,7 @@ Creative Juice is an online platform that different creative people can join and
     <a href="https://github.com/kostastepetes/creative-juice"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/kostastepetes/creative-juice/blob/main/homepage.html">View Demo</a>
+    <a href="https://creative-juice-dev.vercel.app/">View Demo</a>
     ·
     <a href="https://github.com/kostastepetes/creative-juice/issues">Report Bug</a>
     ·
@@ -146,8 +146,6 @@ Project Link: [https://github.com/kostastepetes/creative-juice](https://github.c
 [issues-url]: https://github.com/kostastepetes/creative-juice/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kostas-tepetes
-[product-screenshot]: img/screenshot_docs.png
-[product-screenshot2]: img/screenshot_demo.png
 [Sass]: https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white
 [Sass-url]: https://sass-lang.com/
 [Gulp]: https://img.shields.io/badge/GULP-%23CF4647.svg?style=for-the-badge&logo=gulp&logoColor=white
