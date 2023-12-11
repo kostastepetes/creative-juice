@@ -2,6 +2,157 @@
 
 Creative Juice is an online platform that different creative people can join and connect with other creatives. Enabling an unlimited knowledge exchange, idea-sharing and inspiration environment where like-minded people can network with each other online or face-to-face over coffee.
 
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/kostastepetes/creative-juice">
+    <img src="src\assets\Creative_Juice_Logo-removebg-preview.png" alt="Logo" width="300" height="300">
+  </a>
+
+  <h3 align="center">Creative Juice</h3>
+
+  <p align="center">
+    🥤 Creative Juice is an online platform that connects creative people and allows them to exchange knowledge and ideas online or face-to-face over coffee.
+    <br />
+    <a href="https://github.com/kostastepetes/creative-juice"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://creative-juice-dev.vercel.app/">View Demo</a>
+    ·
+    <a href="https://github.com/kostastepetes/creative-juice/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/kostastepetes/creative-juice/issues">Request Feature</a>
+  </p>
+</div>
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+Creative Juice is an online platform that different creative people can join and connect with other creatives. Enabling an unlimited knowledge exchange, idea-sharing and inspiration environment where like-minded people can network with each other online or face-to-face over coffee. Made with Vite + Vue 3 + Bootstrap 5 + GSAP + Supabase.
+
+### Built With
+
+
+* [![Sass][Sass]][Sass-url]
+* [![Gulp][Gulp]][Gulp-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+### Prerequisites
+
+
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+  * npm
+  ```sh
+  npm create vite@latest creative-juice --template vue
+  ```
+  
+  * npm
+  ```sh
+  npm install @supabase/supabase-js boostrap
+  ```
+  
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/kostastepetes/creative-juice.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Gain Access to Supabase
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+_For more examples, please refer to the [Documentation](https://github.com/kostastepetes/creative-juice)_
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [x] Finish initial development sprint
+- [x] Add Documentation
+- [ ] Add more feautres
+
+
+See the [open issues](https://github.com/kostastepetes/creative-juice/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+LinkedIn - [@kostastepetes](https://www.linkedin.com/in/kostas-tepetes) 
+
+Project Link: [https://github.com/kostastepetes/creative-juice](https://github.com/kostastepetes/creative-juice)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/kostastepetes/creative-juice.svg?style=for-the-badge
+[contributors-url]: https://github.com/kostastepetes/creative-juice/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/kostastepetes/creative-juice.svg?style=for-the-badge
+[forks-url]: https://github.com/kostastepetes/creative-juice/network/members
+[stars-shield]: https://img.shields.io/github/stars/kostastepetes/creative-juice.svg?style=for-the-badge
+[stars-url]: https://github.com/kostastepetes/creative-juice/stargazers
+[issues-shield]: https://img.shields.io/github/issues/kostastepetes/creative-juice.svg?style=for-the-badge
+[issues-url]: https://github.com/kostastepetes/creative-juice/issues
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/kostas-tepetes
+[Sass]: https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white
+[Sass-url]: https://sass-lang.com/
+[Gulp]: https://img.shields.io/badge/GULP-%23CF4647.svg?style=for-the-badge&logo=gulp&logoColor=white
+[Gulp-url]: https://gulpjs.com/
+
+
+
 # Documentation
 
 - Backend
@@ -48,11 +199,7 @@ Creative Juice is an online platform that different creative people can join and
 
 The backend is entirely based on Supabase which is a Postgres Firebase alternative that provides database, auth, realtime APIs all hosted on cloud with the free tier option plan etc.
 
-### Supabase Schema:
-
-![supabase_schema.png](Documentation%2054e957b124fc4cbebb527e084135c2d4/supabase_schema.png)
-
-### Tables:
+### Supabase Tables:
 
 **Users:**
 
