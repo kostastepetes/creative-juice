@@ -12,13 +12,13 @@ Creative Juice is an online platform that different creative people can join and
 <br />
 <div align="center">
   <a href="https://github.com/kostastepetes/creative-juice">
-    <img src="img/logo.png" alt="Logo" width="300" height="300">
+    <img src="src\assets\Creative_Juice_Logo-removebg-preview.png" alt="Logo" width="300" height="300">
   </a>
 
-  <h3 align="center">sqky.</h3>
+  <h3 align="center">Creative Juice</h3>
 
   <p align="center">
-    ✨ sqky is a "squeaky clean" CSS library for elegant and efficient UIs made with SASS.
+    🥤 Creative Juice is an online platform that connects creative people and allows them to exchange knowledge and ideas online or face-to-face over coffee.
     <br />
     <a href="https://github.com/kostastepetes/creative-juice"><strong>Explore the docs »</strong></a>
     <br />
