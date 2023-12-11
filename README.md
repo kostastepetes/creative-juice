@@ -39,8 +39,9 @@ Creative Juice is an online platform that different creative people can join and
 ### Built With
 
 
-* [![Sass][Sass]][Sass-url]
-* [![Gulp][Gulp]][Gulp-url]
+* [![Vue][Vue]][Vue-url]
+* [![Supabase][Supabase]][Supabase-url]
+* [![Bootstrap][Bootstrap]][Bootstrap-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -146,10 +147,12 @@ Project Link: [https://github.com/kostastepetes/creative-juice](https://github.c
 [issues-url]: https://github.com/kostastepetes/creative-juice/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kostas-tepetes
-[Sass]: https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white
-[Sass-url]: https://sass-lang.com/
-[Gulp]: https://img.shields.io/badge/GULP-%23CF4647.svg?style=for-the-badge&logo=gulp&logoColor=white
-[Gulp-url]: https://gulpjs.com/
+[Vue]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
+[Supabase]: https://shields.io/badge/supabase-black?logo=supabase&style=for-the-badge
+[Supabase-url]: https://supabase.com/
+[Bootstrap]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com/
 
 
 
