@@ -11,6 +11,11 @@
         }}
       </button>
     </div>
+    <div class="text-center mt-4">
+    <router-link to="/" class="btn btn-secondary btn-block">
+        Visit Homepage
+    </router-link>
+  </div>
     </div>
   </template>
   
