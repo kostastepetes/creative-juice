@@ -56,7 +56,7 @@ watch(path, () => {
       :src="src"
       alt="Avatar"
       class="avatar image"
-      :style="{ height: size + 'em', width: size + 'em' }"
+      :style="{ height: size + 'em', width: size + 'em', marginTop: '15px', borderRadius: '20%', objectFit: 'cover' }"
     />
     <div v-else class="avatar no-image" :style="{ height: size + 'em', width: size + 'em' }" />
 
