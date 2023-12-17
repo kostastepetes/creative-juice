@@ -12,7 +12,11 @@ const files = ref()
 
 const downloadImage = async () => {
   try {
-    const { data, error } = await supabase.storage.from('background_images').download(path.value)
+    if (!path.value) {
+      console.log('No path provided for image');
+      return;
+    }
+    const { data, error } = await supabase.storage.from('public/background_images').download(path.value)
     if (error) throw error
     src.value = URL.createObjectURL(data)
   } catch (error) {
@@ -55,10 +59,10 @@ watch(path, () => {
       v-if="src"
       :src="src"
       alt="background_image"
-      class="background_image image"
+      class="background-image image"
       :style="{ height: size + 'em', width: 100 + '%', objectFit: 'cover' }"
     />
-    <div v-else class="background_image no-image" :style="{ height: size + 'em', width: 100 + '%', objectFit: 'cover' }" />
+    <div v-else class="background-image no-image" :style="{ height: size + 'em', width: 100 + '%', objectFit: 'cover' }" />
 
     <div v-if="!hideUpload" :style="{ width: size + 'em' }">
       <label class="button primary block" for="single-background-image">
