@@ -22,106 +22,105 @@
   </template>
   
   <script setup>
-// The provided code is a Vue script that contains the logic for a chat component. Here is a breakdown
-// of what each part of the code does:
-import { ref, onMounted, onUnmounted, inject, toRefs } from 'vue'
-import { supabase } from '../supabase'
-import { useRoute, useRouter } from 'vue-router'
-
-let messages = ref([])
-let newMessage = ref('')
-
-const route = useRoute()
-const router = useRouter()
-const { username } = toRefs(route.params)
-
-const props = defineProps(['session'])
-const { session } = toRefs(props)
-
-const hasNewMessages = inject('hasNewMessages')
-
-const goBack = () => {
-  router.go(-1)
-}
-
-onMounted(async () => {
-  let { data, error } = await supabase
-    .from('Chats')
-    .select('*')
-    .eq('recipient', username.value)
-    .order('id', { ascending: false })
-
-  if (error) {
-    console.error('Error: ', error.message)
-    return
+  import { ref, onMounted, onUnmounted, inject, toRefs } from 'vue'
+  import { supabase } from '../supabase'
+  import { useRoute, useRouter } from 'vue-router'
+  
+  let messages = ref([])
+  let newMessage = ref('')
+  let reload = ref(false)
+  
+  const route = useRoute()
+  const router = useRouter()
+  const { username } = toRefs(route.params)
+  
+  const props = defineProps(['session'])
+  const { session } = toRefs(props)
+  
+  const hasNewMessages = inject('hasNewMessages')
+  
+  const goBack = () => {
+    router.go(-1)
   }
-
-  messages.value = data
-
-  // Update the 'read' field to true for all fetched messages
-  for (let message of data) {
-    const { error: updateError } = await supabase
+  
+  const fetchAndUpdateMessages = async () => {
+    let { data, error } = await supabase
       .from('Chats')
-      .update({ read: true })
-      .eq('id', message.id)
-
-    if (updateError) {
-      console.error('Error: ', updateError.message)
+      .select('*')
+      .eq('recipient', username.value)
+      .order('id', { ascending: false })
+  
+    if (error) {
+      console.error('Error: ', error.message)
+      return
+    }
+  
+    messages.value = data
+  
+    // Update the 'read' field to true for all fetched messages
+    if (!reload.value) {
+      for (let message of data) {
+        const { error: updateError } = await supabase
+          .from('Chats')
+          .update({ read: true })
+          .eq('id', message.id)
+  
+        if (updateError) {
+          console.error('Error: ', updateError.message)
+        }
+      }
     }
   }
-
-  supabase
-    .channel('Chats')
-    .on('INSERT', payload => {
-      if (payload.new.recipient === username.value) {
-        messages.value = [...messages.value, payload.new]
-      }
-    })
-    .subscribe()
-})
-
-const getUsername = async (id) => {
-  let { data, error } = await supabase
-    .from('Users')
-    .select('username')
-    .eq('id', id)
-    .single()
-
-  if (error) {
-    console.error('Error: ', error.message)
-    return
+  
+  onMounted(fetchAndUpdateMessages)
+  
+  const getUsername = async (id) => {
+    let { data, error } = await supabase
+      .from('Users')
+      .select('username')
+      .eq('id', id)
+      .single()
+  
+    if (error) {
+      console.error('Error: ', error.message)
+      return
+    }
+  
+    return data.username
   }
-
-  return data.username
-}
-
-const sendMessage = async () => {
-  if (newMessage.value.trim() === '') {
-    return
+  
+  const sendMessage = async () => {
+    if (newMessage.value.trim() === '') {
+      return
+    }
+  
+    let sender = await getUsername(session.value.user.id)
+  
+    let { error } = await supabase
+      .from('Chats')
+      .insert([{ message: newMessage.value, sender: sender, recipient: username.value }])
+  
+    if (error) {
+      console.error('Error: ', error.message)
+    }
+  
+    newMessage.value = ''
+  
+    // Update the 'hasNewMessages' variable in 'Profile.vue'
+    if (username.value === session.value.user.id) {
+      hasNewMessages.value = true
+    }
+  
+    // Set reload to true and fetch messages
+    reload.value = true
+    await fetchAndUpdateMessages()
+    reload.value = false
   }
-
-  let sender = await getUsername(session.value.user.id)
-
-  let { error } = await supabase
-    .from('Chats')
-    .insert([{ message: newMessage.value, sender: sender, recipient: username.value }])
-
-  if (error) {
-    console.error('Error: ', error.message)
-  }
-
-  newMessage.value = ''
-
-  // Update the 'hasNewMessages' variable in 'Profile.vue'
-  if (username.value === session.value.user.id) {
-    hasNewMessages.value = true
-  }
-}
-
-onUnmounted(() => {
-  supabase.removeChannel('Chats')
-})
-</script>
+  
+  onUnmounted(() => {
+    supabase.removeChannel('Chats')
+  })
+  </script>
 
   
   <style scoped>
