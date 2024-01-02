@@ -41,7 +41,7 @@
         <div v-for="profile in filteredProfiles" :key="profile.id" class="col-lg-4 col-md-6 mb-4">
             <router-link :to="`/${profile.username}`">
           <div class="card h-100">
-            <img :src="profile.avatar_url" height="300"/>
+            <img :src="profile.avatar_url" height="300" style="object-fit: cover;"/>
             <div class="card-body">
               <h5 class="card-title">{{ profile.username }}</h5>
               <p class="card-text">{{ profile.job }}</p>

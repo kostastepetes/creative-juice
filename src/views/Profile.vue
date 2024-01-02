@@ -35,14 +35,14 @@
       <div class="card m-2">
           <div class="card-body">
             <h5 class="card-title">Project 2</h5>
-            <a :href="project_url1" class="card-link">{{ project_url2 }}</a>
+            <a :href="project_url2" class="card-link">{{ project_url2 }}</a>
           </div>
       </div>
 
       <div class="card m-2">
           <div class="card-body">
             <h5 class="card-title">Project 3</h5>
-            <a :href="project_url1" class="card-link">{{ project_url3 }}</a>
+            <a :href="project_url3" class="card-link">{{ project_url3 }}</a>
           </div>
       </div>
 
