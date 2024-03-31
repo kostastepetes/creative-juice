@@ -7,7 +7,7 @@ Creative Juice is an online platform that different creative people can join and
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
-
+ 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
